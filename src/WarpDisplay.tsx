@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
-import Footer from "@/components/Footer";
-import OwnerDisplay from "@/components/OwnerDisplay";
-import CopyWarpButton from "@/components/CopyWarpButton";
-import { Helmet } from "react-helmet-async";
+import Footer from "@/components/footer";
+import OwnerDisplay from "@/components/owner-display";
+import CopyWarpButton from "@/components/copy-warp-button";
 
 interface WarpData {
   name: string;
@@ -44,6 +43,7 @@ export default function WarpDisplay() {
         } else {
           setNotFound(true);
         }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (e) {
         setNotFound(true);
       } finally {
@@ -54,16 +54,6 @@ export default function WarpDisplay() {
   }, [warpName, navigate]);
 
   return (
-		<>
-		{!notFound && warp && <Helmet>
-			<title>{warpName} - PWarps Gallery</title>
-			<meta name="description" content={`Player Warps Gallery - ${warp.name}`} /> 
-			<meta property="og:title" content={`/pwarp ${warp.name}`} />
-			<meta property="og:description" content={`${warp.owner}'s Player Warp: ${warp.name}\nCreated at ${warp.created} and visited at least ${warp.visits} time(s)!`} />
-			<meta property="og:image" content={warp.imageUrl} />
-			<meta property="og:url" content={`https://ptwarps.info/warps/${warp.safeName}`} />
-			<meta name="twitter:card" content="summary_large_image" />
-		</Helmet>}
     <div className="min-h-dvh flex flex-col bg-gradient-to-br from-gray-900 to-slate-800">
       <div className="flex-1 flex flex-col items-center justify-center px-2 sm:px-4 md:px-8 w-full">
         <div className="w-full max-w-6xl mx-auto mt-4 mb-6 flex items-start">
@@ -88,7 +78,7 @@ export default function WarpDisplay() {
             <div className="flex-[2_2_0%] min-w-0 max-h-[60vh] md:max-h-[70vh] flex items-center justify-center bg-black aspect-video">
               <img
                 src={warp.imageUrl}
-                alt={`Screenshot of the \"${warp.name}\" warp`}
+                alt={`Screenshot of the "${warp.name}" warp`}
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
@@ -111,6 +101,5 @@ export default function WarpDisplay() {
       </div>
       <Footer />
     </div>
-		</>
   );
 }
